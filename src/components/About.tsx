@@ -1,56 +1,71 @@
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import React from 'react';
+import { GraduationCap, MapPin, User } from 'lucide-react';
 
 const About = () => {
   return (
-    <section className="py-16 bg-slate-50 dark:bg-slate-900">
-      <div className="container mx-auto px-6">
-        <h2 className="text-4xl font-bold text-center mb-12 text-slate-800 dark:text-slate-100">About Me</h2>
-        <div className="grid md:grid-cols-2 gap-8 items-center">
-          <div>
-            <Card className="border border-slate-200 dark:border-slate-700 shadow-lg bg-white dark:bg-slate-800">
-              <CardHeader>
-                <CardTitle className="text-2xl text-slate-800 dark:text-slate-100">Professional Summary</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-                  I'm a passionate Python developer with expertise in backend frameworks and machine learning. 
-                  Currently pursuing B.Tech in Computer Science & Engineering at VSSUT with a CGPA of 8.87/10.
-                </p>
-                <p className="text-slate-600 dark:text-slate-300 leading-relaxed">
-                  My experience spans from building scalable backend systems with FastAPI and Django to developing 
-                  IoT solutions and AI models. I'm particularly interested in cloud infrastructure management and 
-                  have hands-on experience with DevOps practices.
-                </p>
-              </CardContent>
-            </Card>
+    <section id="about" className="py-20 bg-gray-900">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl font-bold text-white mb-4">About Me</h2>
+          <div className="w-20 h-1 bg-teal-400 mx-auto"></div>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div className="space-y-6">
+            <div className="flex items-center space-x-3 text-gray-300">
+              <MapPin className="text-teal-400" size={20} />
+              <span>Bhubaneswar, India</span>
+            </div>
+            
+            <div className="space-y-4 text-gray-300 leading-relaxed">
+              <p>
+                I'm a passionate Computer Science student at VSSUT with a strong foundation in 
+                full-stack development and artificial intelligence. My journey in technology has 
+                led me to explore various domains including IoT, machine learning, and cloud infrastructure.
+              </p>
+              
+              <p>
+                Currently working as a Developer Intern at Codecis AI, where I contribute to enterprise 
+                CRM platforms and enhance deployment pipelines for development teams. I have hands-on 
+                experience with modern technologies and a proven track record of building scalable solutions.
+              </p>
+              
+              <p>
+                When I'm not coding, you'll find me participating in hackathons, contributing to open-source 
+                projects, or exploring the latest trends in AI and machine learning. I believe in continuous 
+                learning and pushing the boundaries of what's possible with technology.
+              </p>
+            </div>
           </div>
-          <div>
-            <Card className="border border-slate-200 dark:border-slate-700 shadow-lg bg-white dark:bg-slate-800">
-              <CardHeader>
-                <CardTitle className="text-2xl text-slate-800 dark:text-slate-100">Current Focus</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ul className="space-y-3 text-slate-600 dark:text-slate-300">
-                  <li className="flex items-center gap-2">
-                    <div className="w-2 h-2 bg-blue-600 dark:bg-blue-400 rounded-full"></div>
-                    Backend Development with Python frameworks
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <div className="w-2 h-2 bg-blue-600 dark:bg-blue-400 rounded-full"></div>
-                    Machine Learning & Deep Learning projects
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <div className="w-2 h-2 bg-blue-600 dark:bg-blue-400 rounded-full"></div>
-                    Cloud Infrastructure & DevOps practices
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <div className="w-2 h-2 bg-blue-600 dark:bg-blue-400 rounded-full"></div>
-                    IoT systems development
-                  </li>
-                </ul>
-              </CardContent>
-            </Card>
+
+          <div className="space-y-6">
+            <div className="bg-black p-6 rounded-lg border border-gray-700">
+              <div className="flex items-center space-x-3 mb-4">
+                <GraduationCap className="text-teal-400" size={24} />
+                <h3 className="text-xl font-semibold text-white">Education</h3>
+              </div>
+              
+              <div className="space-y-4">
+                <div>
+                  <h4 className="font-semibold text-teal-400">B.Tech, Computer Science & Engineering</h4>
+                  <p className="text-gray-300">Veer Surendra Sai University Of Technology (VSSUT), Burla</p>
+                  <p className="text-sm text-gray-400">CGPA: 8.87/10</p>
+                </div>
+                
+                <div>
+                  <h4 className="font-semibold text-teal-400">Senior Secondary (XII)</h4>
+                  <p className="text-gray-300">Delhi Public School Ruby Park (CBSE Board), Kolkata</p>
+                  <p className="text-sm text-gray-400">Percentage: 93.60%</p>
+                </div>
+                
+                <div>
+                  <h4 className="font-semibold text-teal-400">Secondary (X)</h4>
+                  <p className="text-gray-300">Mahadevi Birla Shishu Vihar (ICSE Board), Kolkata</p>
+                  <p className="text-sm text-gray-400">Percentage: 95.10%</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
