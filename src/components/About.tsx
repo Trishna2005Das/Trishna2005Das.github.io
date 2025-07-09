@@ -20,21 +20,19 @@ const About = () => {
             
             <div className="space-y-4 text-gray-300 leading-relaxed">
               <p>
-                I'm a passionate Computer Science student at VSSUT with a strong foundation in 
-                full-stack development and artificial intelligence. My journey in technology has 
-                led me to explore various domains including IoT, machine learning, and cloud infrastructure.
+               I’m Trishna Das , who thrives at the intersection of engineering and innovation. I enjoy building systems that not only work — but make sense. Whether it’s designing logic, automating tasks, or improving reliability, I focus on delivering solutions that are functional, scalable, and impactful.
+
+
               </p>
               
               <p>
-                Currently working as a Developer Intern at Codecis AI, where I contribute to enterprise 
-                CRM platforms and enhance deployment pipelines for development teams. I have hands-on 
-                experience with modern technologies and a proven track record of building scalable solutions.
+                My internship experiences across industries — from finance (WNS) and healthcare (Inovaare) to enterprise CRM (Codecis AI) — have taught me how to work on real-world problems in fast-paced environments. These roles strengthened my ability to think critically, build with purpose, and navigate production-grade codebases with confidence.
               </p>
               
               <p>
-                When I'm not coding, you'll find me participating in hackathons, contributing to open-source 
-                projects, or exploring the latest trends in AI and machine learning. I believe in continuous 
-                learning and pushing the boundaries of what's possible with technology.
+               I’ve taken on complex challenges in national hackathons, where I’ve led teams, built end-to-end platforms under pressure, and pitched to real stakeholders. What excites me most is using technology to improve systems, simplify processes, and create value — and I’m always looking for teams that share that mindset.
+
+Outside of development, I’m someone who enjoys focused learning, sharp discussions, and a clean workspace (with way too many sticky notes).
               </p>
             </div>
           </div>

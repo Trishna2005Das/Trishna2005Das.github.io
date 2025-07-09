@@ -8,13 +8,25 @@ const Experience = () => {
       title: "Developer Intern",
       company: "WNS",
       location: "Remote", 
-      period: "June - August 2025",
+      period: "June - present",
       description: [
         "Developed a full-stack AI-powered task management web application for internal use",
         "Integrated intelligent features like OpenAI-powered automation and LangChain agents, with secure user authentication",
         "Built scalable solutions using modern web technologies and cloud deployment"
       ],
       technologies: ["Flask", "Angular", "MongoDB", "OpenAI API", "LangChain", "Docker", "GitHub Actions", "AWS"]
+    },  {
+      type: "work",
+      title: "Product Development Intern",
+      company: "Inovaare",
+      location: "DLF Cyber City, Bhubaneswar",
+      period: "May - July 2024",
+      description: [
+        "Contributed to automating healthcare compliance workflows on Inovaare's audit platform",
+        "Implemented OCR-based form parsing, KPI dashboards, and AWS S3-based secure file handling",
+        "Developed automated solutions to streamline healthcare audit processes"
+      ],
+      technologies: ["Python", "AWS S3", "OCR (Tesseract)", "REST APIs", "Bootstrap", "KPI modules"]
     },
     {
       type: "work",
@@ -29,19 +41,7 @@ const Experience = () => {
       ],
       technologies: ["Flask", "MongoDB", "REST APIs", "Git", "DevOps (CI/CD)", "Cloud Hosting"]
     },
-    {
-      type: "work",
-      title: "AI Intern",
-      company: "Inovaare",
-      location: "Remote",
-      period: "May - July 2024",
-      description: [
-        "Contributed to automating healthcare compliance workflows on Inovaare's audit platform",
-        "Implemented OCR-based form parsing, KPI dashboards, and AWS S3-based secure file handling",
-        "Developed automated solutions to streamline healthcare audit processes"
-      ],
-      technologies: ["Python", "AWS S3", "OCR (Tesseract)", "REST APIs", "Bootstrap", "KPI modules"]
-    },
+  
     {
       type: "training",
       title: "IBM SkillsBuild Summer Internship",

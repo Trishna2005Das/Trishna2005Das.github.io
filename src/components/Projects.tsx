@@ -4,12 +4,15 @@ import { ExternalLink, Github, Code } from 'lucide-react';
 
 const Projects = () => {
   const projects = [
-    {
-      title: "IoT-Based Milk Freshness Detection System",
-      description: "Developed an ESP32-based system using temperature, ultrasonic, calorimetric, and methane sensors to detect milk freshness. Integrated Python analysis into C for data transmission to ThingSpeak and MATLAB for visualization.",
-      technologies: ["ESP32", "Python", "C", "ThingSpeak", "MATLAB", "IoT Sensors"],
-      category: "IoT & Hardware"
-    },
+   {
+  title: "IoT-Based Milk Freshness Detection System",
+  description: "Developed an ESP32-based system using temperature, ultrasonic, calorimetric, and methane sensors to detect milk freshness. Integrated Python analysis into C for data transmission to ThingSpeak and MATLAB for visualization.",
+  technologies: ["ESP32", "Python", "C", "ThingSpeak", "MATLAB", "IoT Sensors"],
+  category: "IoT & Hardware",
+  link: "https://youtu.be/Gj1L0_OP2Zk?si=WVsHGmj6Um5birNM",  // ✅ YouTube demo link
+  linkType: "demo" // ✅ Make sure this is not 'github'
+}
+,
     {
       title: "Self-Balancing Bot with LQR Control",
       description: "Designed and simulated a self-balancing bot in CoppeliaSim, optimizing LQR parameters for stability and disturbance handling. Implemented velocity control and manipulator integration.",

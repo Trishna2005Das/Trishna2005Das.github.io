@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Code, Mail } from 'lucide-react';
 
@@ -14,12 +13,11 @@ const Hero = () => {
     "Cloud: AWS, Docker, Kubernetes",
     "AI/ML: PyTorch, TensorFlow, NLP",
     "trishna@dev:~$ git status",
-    "Currently working on: CRM Platform @ Codecis AI"
   ];
 
   useEffect(() => {
     let timeoutId: NodeJS.Timeout;
-    
+
     if (isTyping && currentCommand < commands.length) {
       const currentText = commands[currentCommand];
       if (displayText.length < currentText.length) {
@@ -44,23 +42,21 @@ const Hero = () => {
   return (
     <section className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black flex items-center justify-center px-4 pt-20">
       <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+        
+        {/* Left Section */}
         <div className="space-y-8">
           <div className="space-y-4">
-            <h1 className="text-5xl md:text-7xl font-bold text-white leading-tight">
-              Full Stack
+            <h1 className="text-5xl md:text-6xl font-bold text-white leading-tight">
+              Python Developer <span className="text-teal-400">Backend & DevOps Focus</span>
             </h1>
-            <h1 className="text-5xl md:text-7xl font-bold text-teal-400 leading-tight">
-              Developer & AI
-            </h1>
-            <h1 className="text-5xl md:text-7xl font-bold text-white leading-tight">
-              Engineer
-            </h1>
+
+            <h2 className="text-xl md:text-2xl text-gray-400 mt-2 font-medium">
+              Exploring AI/ML • Learning by Building 
+            </h2>
           </div>
-          
-          <p className="text-xl text-gray-300 max-w-2xl leading-relaxed">
-            Computer Science student at VSSUT with expertise in full-stack development, 
-            artificial intelligence, and cloud technologies. Currently interning at Codecis AI, 
-            working on enterprise CRM platforms and DevOps infrastructure.
+
+          <p className="text-lg text-gray-300 max-w-2xl leading-relaxed">
+            I enjoy crafting intelligent, scalable systems that are built with purpose and optimized for impact — from Python APIs to cloud deployments. My interest lies in bridging development, infrastructure, and AI to deliver meaningful software.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4">
@@ -81,13 +77,14 @@ const Hero = () => {
           </div>
         </div>
 
+        {/* Right Section - Terminal Simulation */}
         <div className="bg-gray-900 rounded-lg p-6 font-mono text-sm border border-gray-700 shadow-2xl">
           <div className="flex items-center space-x-2 mb-4">
             <div className="w-3 h-3 bg-red-500 rounded-full"></div>
             <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
             <div className="w-3 h-3 bg-green-500 rounded-full"></div>
           </div>
-          
+
           <div className="space-y-2 min-h-[200px]">
             {commands.slice(0, currentCommand).map((cmd, index) => (
               <div key={index} className="text-gray-300">

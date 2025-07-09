@@ -97,11 +97,12 @@ const Contact = () => {
 
           <div className="bg-black p-8 rounded-lg border border-gray-700">
             <div className="text-center space-y-6">
-              <div className="w-32 h-32 mx-auto">
+              <div className="mx-auto">
                 <img 
-                  src="/lovable-uploads/8fb49030-a646-4f96-9786-1f3ecb736036.png" 
+                  src="/profile-image/trish.png" 
                   alt="Trishna Das Profile Photo" 
-                  className="w-full h-full object-cover rounded-full border-4 border-teal-400/20 hover:border-teal-400/50 transition-colors duration-200"
+    className="rounded-full object-cover border-4 border-teal-400/30 hover:border-teal-400 transition duration-300 mx-auto"
+        style={{ width: '250px', height: '250px', aspectRatio: '1 / 1', objectPosition: 'center' }}
                 />
               </div>
               
