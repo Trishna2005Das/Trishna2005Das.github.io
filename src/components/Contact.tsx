@@ -99,7 +99,7 @@ const Contact = () => {
             <div className="text-center space-y-6">
               <div className="mx-auto">
                 <img 
-                  src="/profile-image/trish.png" 
+                    src="/public/profile-image/trish.png" 
                   alt="Trishna Das Profile Photo" 
     className="rounded-full object-cover border-4 border-teal-400/30 hover:border-teal-400 transition duration-300 mx-auto"
         style={{ width: '250px', height: '250px', aspectRatio: '1 / 1', objectPosition: 'center' }}
