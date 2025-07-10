@@ -47,7 +47,7 @@ const Hero = () => {
         <div className="space-y-8">
           <div className="space-y-4">
             <h1 className="text-5xl md:text-6xl font-bold text-white leading-tight">
-              Python Developer <span className="text-teal-400">Backend & DevOps Focus</span>
+              Python Developer <span className="text-teal-400">Backend & DevOps</span>
             </h1>
 
             <h2 className="text-xl md:text-2xl text-gray-400 mt-2 font-medium">
