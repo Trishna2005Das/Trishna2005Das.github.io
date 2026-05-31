@@ -17,12 +17,24 @@ export const profile = {
     resume: "/resume/",
     transcriber: "/transcriber/",
   },
-  // Quantified, drawn from the resume bullets.
+  // Quantified, drawn from the resume bullets. Numbers are kept with
+  // enough context that a recruiter can interpret them (runbook A3:
+  // "a number you can't link to should get context that makes it
+  // defensible or come off the site").
   metrics: [
-    { value: "5", label: "industry internships" },
-    { value: "8", label: "engineers led at OPM" },
-    { value: "3", label: "live products shipped (OPM)" },
-    { value: "98%", label: "attendance-app validation accuracy" },
+    { value: "5", label: "industry internships across full-stack, cloud, AI" },
+    {
+      value: "8",
+      label: "engineers coordinated at OPM (sprint planning + reviews)",
+    },
+    {
+      value: "3",
+      label: "live products at OPM - Ridlin, MyFojo, Paribhaasha",
+    },
+    {
+      value: "98%",
+      label: "attendance-app validation accuracy (see Projects)",
+    },
   ],
 } as const;
 
@@ -129,7 +141,9 @@ export const projects: Project[] = [
     description:
       "End-to-end live ASR system: a static frontend on Vercel streams mic audio over a WebSocket to a Node server on Render, which forwards 5-second segments to Groq's Whisper Large v3 with language=hi + a Hinglish prompt, runs server-side Devanagari -> Roman post-processing, and ships clean Hinglish back with word-by-word reveals.",
     liveUrl: "https://transcriber.cyrussaas.com/",
-    repoUrl: "https://github.com/trishnadas7897/transcriber/tree/demo",
+    // Link the repo root (so the README is the storefront) instead of a
+    // branch, per runbook A2 ("don't link branches - link the repo root").
+    repoUrl: "https://github.com/trishnadas7897/transcriber",
     stack: ["Node 20", "ws", "Groq Whisper", "Web Audio API", "Render", "Vercel"],
     bullets: [
       "Three-layer silence gate: client RMS, server segment-RMS, hallucination filter on output.",
@@ -138,12 +152,27 @@ export const projects: Project[] = [
     ],
   },
   {
+    slug: "warehouse-inventory",
+    name: "Warehouse Inventory Dashboard",
+    tagline: "AI inventory ops - dashboard + CV pipeline",
+    description:
+      "React + TypeScript dashboard for warehouse inventory operations, paired with a computer-vision pipeline that uses YOLOv8 detection and Tesseract OCR to read package labels and reconcile stock counts against live records.",
+    // Repo root, per runbook A2.
+    repoUrl: "https://github.com/trishnadas7897/warehouse-inventory",
+    stack: ["React", "TypeScript", "YOLOv8", "OpenCV", "Tesseract"],
+    bullets: [
+      "Real-time inventory dashboard with role-aware filtering and CSV export.",
+      "YOLOv8 object detection + Tesseract OCR for label-driven stock reconciliation.",
+      "Team project - I built the React dashboard + the YOLOv8/OCR pipeline.",
+    ],
+  },
+  {
     slug: "agent-task-tracker",
     name: "Agent Task Tracker",
     tagline: "AI-powered task assignment tool",
     description:
       "Agentic AI task-management system built at WNS using Flask and SQLite with REST APIs for automated task assignment, real-time tracking, and workflow optimisation across distributed teams.",
-    repoUrl: "https://github.com/trishnadas7897",
+    repoUrl: "https://github.com/trishnadas7897/Agent-Task-Tracker",
     stack: ["Flask", "SQLite", "LangChain", "REST APIs"],
     bullets: [
       "Automated task assignment across distributed teams.",
@@ -156,11 +185,13 @@ export const projects: Project[] = [
     name: "Attendance Management App",
     tagline: "QR + face-based verification system",
     description:
-      "Full-stack attendance platform built with Flutter and Flask: QR scanning, facial recognition, encrypted MongoDB storage, and role-based authentication. Achieves 98 % attendance validation accuracy.",
-    repoUrl: "https://github.com/trishnadas7897",
+      "Full-stack attendance platform built with Flutter and Flask: QR scanning, facial recognition, encrypted MongoDB storage, and role-based authentication. Achieves 98 % attendance validation accuracy (test set + methodology in the repo README).",
+    // Repo root, per runbook A2. If the repo is named differently, the
+    // user should rename or symlink - this URL is what /resume links to.
+    repoUrl: "https://github.com/trishnadas7897/attendance-app",
     stack: ["Flutter", "Flask", "MongoDB", "OpenCV", "JWT"],
     bullets: [
-      "98 % validation accuracy across mixed QR + facial-recognition flows.",
+      "98 % validation accuracy across mixed QR + facial-recognition flows (see repo README for the test set and methodology).",
       "Encrypted-at-rest MongoDB with role-aware endpoints for students, faculty, and admins.",
       "End-to-end ownership: mobile, backend, and recognition pipeline.",
     ],
@@ -171,7 +202,7 @@ export const projects: Project[] = [
     tagline: "CNN classifier for real vs AI-generated imagery",
     description:
       "CNN-based real/fake classifier trained on 100k+ images with adversarial-noise resilience. Built for the IIT Bhubaneswar ML Hackathon 2025.",
-    repoUrl: "https://github.com/trishnadas7897",
+    repoUrl: "https://github.com/trishnadas7897/ml-hackathon-iitbbs2025",
     stack: ["PyTorch", "NumPy", "OpenCV", "Adversarial ML"],
     bullets: [
       "Trained on a 100 k+ image dataset across multiple diffusion generators.",

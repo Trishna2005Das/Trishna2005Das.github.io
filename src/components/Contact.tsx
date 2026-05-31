@@ -60,7 +60,7 @@ export default function Contact() {
                 Let's build <span className="text-gradient-mint">something serious</span>.
               </h2>
               <p className="mt-5 max-w-xl text-base text-foreground/65 md:text-lg">
-                Open to full-time roles in 2027, summer 2026 collaborations, and interesting side projects in AI systems, fintech, or regulated infrastructure. Always replying within a day.
+                Graduating 2027. Open to <span className="text-mint">Summer 2026 internships</span>, <span className="text-mint">2027 new-grad roles</span>, and interesting side projects in AI systems, fintech, or regulated infrastructure. Always replying within a day.
               </p>
 
               <motion.a
