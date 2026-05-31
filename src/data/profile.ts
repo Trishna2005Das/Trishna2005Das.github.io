@@ -157,8 +157,9 @@ export const projects: Project[] = [
     tagline: "AI inventory ops - dashboard + CV pipeline",
     description:
       "React + TypeScript dashboard for warehouse inventory operations, paired with a computer-vision pipeline that uses YOLOv8 detection and Tesseract OCR to read package labels and reconcile stock counts against live records.",
-    // Repo root, per runbook A2.
-    repoUrl: "https://github.com/trishnadas7897/warehouse-inventory",
+    // Repo root, per runbook A2. Real repo name is
+    // `warehouse-inventory-management` (verified from the clone).
+    repoUrl: "https://github.com/trishnadas7897/warehouse-inventory-management",
     stack: ["React", "TypeScript", "YOLOv8", "OpenCV", "Tesseract"],
     bullets: [
       "Real-time inventory dashboard with role-aware filtering and CSV export.",
