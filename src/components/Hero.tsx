@@ -1,10 +1,12 @@
 import { motion } from "framer-motion";
 import { profile } from "@/data/profile";
 
-// Banned per spec: typewriter animations, particle backgrounds, generic
-// catchphrases. Hero uses smooth fade + staggered slide-ups only, with
-// the resume's real "Full Stack Software Engineer | AI & Automation
-// Engineer" tagline and the verbatim professional summary.
+// Banned per spec: typewriter, particle backgrounds, generic catchphrases.
+// LCP rule (runbook A1): no element delays the first meaningful paint.
+// Every reveal uses a small opacity + 12 px translate, 0.4 s duration,
+// zero or single-frame delays - so the recruiter sees name + role +
+// summary effectively on load instead of black-frame waiting on
+// staggered timings.
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -12,12 +14,11 @@ export default function Hero() {
   return (
     <section
       id="top"
-      className="relative flex min-h-[100dvh] w-full flex-col items-center justify-center overflow-hidden px-6 lg:px-12"
+      // 88vh instead of 100dvh so the Projects section peeks above the
+      // fold - signals "there's more content here" instantly.
+      className="relative flex min-h-[88vh] w-full flex-col items-center justify-center overflow-hidden px-6 pt-24 pb-12 lg:px-12"
     >
-      {/* Static gradient mesh - the only "wow" the background gets.
-          Three soft radial gradients (mint + cool blue + cyan tint) on
-          a graphite ground, with a subtle SVG-noise overlay to prevent
-          gradient banding. No particles, no floating dots. */}
+      {/* Static gradient mesh + grid + noise. No particles. */}
       <div
         className="pointer-events-none absolute inset-0 -z-30"
         aria-hidden
@@ -37,9 +38,9 @@ export default function Hero() {
       <div className="mx-auto flex max-w-5xl flex-col items-start text-left md:items-center md:text-center">
         {/* Currently-at badge - data-driven, no invented copy. */}
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease }}
+          transition={{ duration: 0.35, ease }}
           className="mb-8 inline-flex items-center gap-3 rounded-full border border-mint/25 bg-mint/[0.05] px-4 py-1.5 backdrop-blur-sm"
         >
           <span className="relative flex h-2 w-2">
@@ -51,40 +52,39 @@ export default function Hero() {
           </span>
         </motion.div>
 
-        {/* Headline - smooth-fade staggered, no typewriter. */}
+        {/* Headline - LCP element. Tiny transform, no delay. */}
         <motion.h1
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.95, delay: 0.06, ease }}
+          transition={{ duration: 0.4, ease }}
           className="font-display text-5xl font-semibold leading-[1.04] tracking-tightest text-foreground md:text-7xl lg:text-[5.4rem]"
         >
           <span className="block">{profile.name}.</span>
           <motion.span
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.95, delay: 0.18, ease }}
+            transition={{ duration: 0.4, delay: 0.05, ease }}
             className="mt-2 block text-gradient-mint"
           >
             {profile.tagline}.
           </motion.span>
         </motion.h1>
 
-        {/* Verbatim professional summary from the resume. No "I build
-            things for the web" or other generic copy. */}
+        {/* Verbatim professional summary from the resume. Lands fast. */}
         <motion.p
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.95, delay: 0.32, ease }}
-          className="mt-7 max-w-2xl text-base leading-relaxed text-foreground/70 md:text-lg"
+          transition={{ duration: 0.4, delay: 0.1, ease }}
+          className="mt-7 max-w-2xl text-base leading-relaxed text-foreground/75 md:text-lg"
         >
           {profile.summary}
         </motion.p>
 
         {/* CTA row */}
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.95, delay: 0.42, ease }}
+          transition={{ duration: 0.35, delay: 0.15, ease }}
           className="mt-10 flex flex-wrap items-center gap-3 md:justify-center"
         >
           <a href="#projects" className="btn-mint">
@@ -109,12 +109,24 @@ export default function Hero() {
           </a>
         </motion.div>
 
-        {/* Identity strip - location, contact, source */}
+        {/* Availability line (runbook A4): graduating 2027, open to both
+            Summer 2026 internships and 2027 new-grad roles. Self-selects
+            for a recruiter hiring now AND one planning the pipeline. */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="mt-6 text-xs text-foreground/55 md:text-sm"
+        >
+          Graduating 2027 &middot; open to <span className="text-mint">Summer 2026 internships</span> and <span className="text-mint">2027 new-grad roles</span>.
+        </motion.p>
+
+        {/* Identity strip - location + LinkedIn + GitHub */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 0.6 }}
-          className="mt-10 flex flex-wrap items-center gap-x-5 gap-y-2 font-mono text-[11px] uppercase tracking-[0.22em] text-foreground/45 md:justify-center"
+          transition={{ duration: 0.5, delay: 0.25 }}
+          className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 font-mono text-[11px] uppercase tracking-[0.22em] text-foreground/45 md:justify-center"
         >
           <span>{profile.location}</span>
           <span className="hidden h-1 w-1 rounded-full bg-mint/50 md:inline-block" />
@@ -125,24 +137,6 @@ export default function Hero() {
           <a href={profile.links.github} target="_blank" rel="noopener" className="transition-colors hover:text-mint">GitHub</a>
         </motion.div>
       </div>
-
-      {/* Scroll cue */}
-      <motion.a
-        href="#about"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.1, duration: 1 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/35 transition-colors hover:text-mint"
-        aria-label="Scroll down"
-      >
-        <span className="mb-2 block text-center">scroll</span>
-        <svg viewBox="0 0 24 40" width="18" height="30" fill="none" stroke="currentColor" strokeWidth="1.2" className="mx-auto">
-          <rect x="6" y="2" width="12" height="22" rx="6" />
-          <line x1="12" y1="8" x2="12" y2="14">
-            <animate attributeName="y2" values="14;20;14" dur="2s" repeatCount="indefinite" />
-          </line>
-        </svg>
-      </motion.a>
     </section>
   );
 }
