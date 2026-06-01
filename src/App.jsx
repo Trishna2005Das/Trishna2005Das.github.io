@@ -113,19 +113,16 @@ function Cursor() {
       trailX.set(e.clientX);
       trailY.set(e.clientY);
     };
-    const handleMouseOver = (e) => {
-      if (e.target && e.target.closest && e.target.closest("a, button, [data-magnetic]")) {
-        setHovered(true);
-      } else {
-        setHovered(false);
-      }
-    };
+    const enter = () => setHovered(true);
+    const leave = () => setHovered(false);
 
     window.addEventListener("mousemove", move);
-    window.addEventListener("mouseover", handleMouseOver);
+    document.querySelectorAll("a,button,[data-magnetic]").forEach((el) => {
+      el.addEventListener("mouseenter", enter);
+      el.addEventListener("mouseleave", leave);
+    });
     return () => {
       window.removeEventListener("mousemove", move);
-      window.removeEventListener("mouseover", handleMouseOver);
     };
   }, []);
 
@@ -298,7 +295,7 @@ const Display = ({ children, style = {}, tag = "h2" }) => {
 };
 
 const Body = ({ children, style = {} }) => (
-  <p
+  <div
     style={{
       fontFamily: "'Jost', sans-serif",
       fontWeight: 300,
@@ -309,7 +306,7 @@ const Body = ({ children, style = {} }) => (
     }}
   >
     {children}
-  </p>
+  </div>
 );
 
 const Tag = ({ children }) => (
@@ -636,70 +633,42 @@ function WorkSection() {
    A tall sticky container traps vertical scroll
    and converts it into horizontal motion
 ───────────────────────────────────────────── */
-const renderProjectBody = (bodyText) => {
-  const urlRegex = /(https?:\/\/[^\s]+|transcriber\.cyrussaas\.com)/g;
-  return bodyText.split("\n\n").map((para, pIdx) => {
-    const parts = para.split(urlRegex);
-    return (
-      <Body key={pIdx} style={{ marginBottom: "0.8rem" }}>
-        {parts.map((part, idx) => {
-          if (part === "transcriber.cyrussaas.com") {
-            return (
-              <a
-                key={idx}
-                href="https://transcriber.cyrussaas.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  color: C.accent,
-                  textDecoration: "underline",
-                  textUnderlineOffset: "3px",
-                  fontWeight: 400,
-                  cursor: "pointer",
-                }}
-              >
-                transcriber.cyrussaas.com
-              </a>
-            );
-          } else if (part.match(/^https?:\/\//)) {
-            return (
-              <a
-                key={idx}
-                href={part}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  color: C.accent,
-                  textDecoration: "underline",
-                  textUnderlineOffset: "3px",
-                  fontWeight: 400,
-                  cursor: "pointer",
-                }}
-              >
-                {part.replace(/^https?:\/\//, "")}
-              </a>
-            );
-          }
-          return part;
-        })}
-      </Body>
-    );
-  });
-};
-
 const PROJECTS = [
   {
     num: "01",
     title: "Hinglish Live Transcriber",
     sub: "Production ASR Web App",
-    body: `Built a production-deployed real-time Hinglish ASR web app, streaming 16kHz mono PCM from the browser over WebSockets to a Node.js server that segments audio into 3-second WAV chunks and forwards them to Groq Whisper Large v3 with Hindi language forcing and a Hinglish context prompt
-
-Designed a split deployment architecture (Vercel static frontend + Render persistent Node backend, Singapore region) to support persistent WebSocket connections that Vercel's serverless edge terminates — achieving ~80ms RTT from India
-
-Implemented server-side Romanisation (Devanagari to Latin via Hunterian transliteration), per-IP session rate limiting, a hallucination filter, transparent cold-start warm-up UI, and a live Canvas FFT audio visualiser using the Web Audio API
-
-Live at transcriber.cyrussaas.com — handles ~2,000 daily transcriptions on Groq's free-tier quota; stack: Node.js, WebSockets, Web Audio API, Canvas API, Vercel, Render`,
-    tech: ["Node.js", "WebSockets", "Groq Whisper", "Web Audio API", "Canvas API", "Vercel", "Render"],
+    body: (
+      <>
+        <p style={{ marginBottom: "0.8rem" }}>
+          Engineered a production ASR web app handling ~2,000 daily transcriptions via Groq Whisper and Node.js WebSockets, utilising a split Vercel/Render architecture for ~80ms RTT, live Web Audio API visualisation, and server-side Hunterian transliteration.
+        </p>
+        <ul style={{ listStyleType: "disc", paddingLeft: "1.2rem", display: "flex", flexDirection: "column", gap: "0.4rem" }}>
+          <li>
+            Built a production-deployed real-time Hinglish ASR web app, streaming 16kHz mono PCM from the browser over WebSockets to a Node.js server that segments audio into 3-second WAV chunks and forwards them to Groq Whisper Large v3 with Hindi language forcing and a Hinglish context prompt
+          </li>
+          <li>
+            Designed a split deployment architecture (Vercel static frontend + Render persistent Node backend, Singapore region) to support persistent WebSocket connections that Vercel's serverless edge terminates — achieving ~80ms RTT from India
+          </li>
+          <li>
+            Implemented server-side Romanisation (Devanagari to Latin via Hunterian transliteration), per-IP session rate limiting, a hallucination filter, transparent cold-start warm-up UI, and a live Canvas FFT audio visualiser using the Web Audio API
+          </li>
+          <li>
+            Live at{" "}
+            <a
+              href="https://transcriber.cyrussaas.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: "inherit", textDecoration: "underline" }}
+            >
+              transcriber.cyrussaas.com
+            </a>{" "}
+            — handles ~2,000 daily transcriptions on Groq's free-tier quota.
+          </li>
+        </ul>
+      </>
+    ),
+    tech: ["Node.js, WebSockets, Web Audio API, Canvas API, Vercel, Render"],
     accent: C.accent,
   },
   {
@@ -725,13 +694,13 @@ function ProjectCard({ project, isActive }) {
   return (
     <motion.article
       style={{
-        width: "min(78vw, 620px)",
+        width: "min(84vw, 850px)",
         flexShrink: 0,
-        padding: "clamp(2.5rem,5vw,4rem)",
+        padding: "clamp(1.5rem,4vw,2.5rem)",
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
-        height: "100%",
+        height: "auto",
         borderLeft: `0.5px solid ${C.rule}`,
         userSelect: "none",
       }}
@@ -742,7 +711,7 @@ function ProjectCard({ project, isActive }) {
       }
       transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
     >
-      <div style={{ display: "flex", flexDirection: "column", flex: 1, overflow: "hidden", minHeight: 0 }}>
+      <div>
         <p
           style={{
             fontFamily: "'Cormorant Garamond', serif",
@@ -774,27 +743,15 @@ function ProjectCard({ project, isActive }) {
             letterSpacing: "0.18em",
             textTransform: "uppercase",
             color: project.accent,
-            margin: "0.5rem 0 1.5rem",
+            margin: "0.4rem 0 1rem",
           }}
         >
           {project.sub}
         </p>
-        <Rule style={{ marginBottom: "1.5rem" }} />
-        
-        {/* Scrollable body container that dynamically fills the space */}
-        <div 
-          className="project-body-scroll"
-          style={{ 
-            overflowY: "auto", 
-            flex: 1,
-            paddingRight: "0.5rem",
-            minHeight: 0
-          }}
-        >
-          {renderProjectBody(project.body)}
-        </div>
+        <Rule style={{ marginBottom: "1rem" }} />
+        <Body>{project.body}</Body>
       </div>
-      <div style={{ display: "flex", flexWrap: "wrap", gap: "0.45rem", marginTop: "1.5rem", flexShrink: 0 }}>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: "0.45rem", marginTop: "1.2rem" }}>
         {project.tech.map((t) => (
           <Tag key={t}>{t}</Tag>
         ))}
@@ -957,7 +914,7 @@ function HorizontalProjects() {
 
       {/* Draggable track */}
       <div
-        style={{ overflow: "hidden", height: "clamp(340px,55vh,520px)", touchAction: "pan-y" }}
+        style={{ overflow: "hidden", height: "auto", padding: "1.5rem 0", touchAction: "pan-y" }}
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
         onPointerUp={onPointerUp}
@@ -970,8 +927,7 @@ function HorizontalProjects() {
             x: xSpring,
             paddingLeft: "clamp(2rem,8vw,10rem)",
             paddingRight: "clamp(2rem,8vw,10rem)",
-            height: "100%",
-            alignItems: "center",
+            alignItems: "stretch",
             cursor: "grab",
           }}
         >
