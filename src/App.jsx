@@ -113,16 +113,19 @@ function Cursor() {
       trailX.set(e.clientX);
       trailY.set(e.clientY);
     };
-    const enter = () => setHovered(true);
-    const leave = () => setHovered(false);
+    const handleMouseOver = (e) => {
+      if (e.target && e.target.closest && e.target.closest("a, button, [data-magnetic]")) {
+        setHovered(true);
+      } else {
+        setHovered(false);
+      }
+    };
 
     window.addEventListener("mousemove", move);
-    document.querySelectorAll("a,button,[data-magnetic]").forEach((el) => {
-      el.addEventListener("mouseenter", enter);
-      el.addEventListener("mouseleave", leave);
-    });
+    window.addEventListener("mouseover", handleMouseOver);
     return () => {
       window.removeEventListener("mousemove", move);
+      window.removeEventListener("mouseover", handleMouseOver);
     };
   }, []);
 
@@ -633,13 +636,70 @@ function WorkSection() {
    A tall sticky container traps vertical scroll
    and converts it into horizontal motion
 ───────────────────────────────────────────── */
+const renderProjectBody = (bodyText) => {
+  const urlRegex = /(https?:\/\/[^\s]+|transcriber\.cyrussaas\.com)/g;
+  return bodyText.split("\n\n").map((para, pIdx) => {
+    const parts = para.split(urlRegex);
+    return (
+      <Body key={pIdx} style={{ marginBottom: "0.8rem" }}>
+        {parts.map((part, idx) => {
+          if (part === "transcriber.cyrussaas.com") {
+            return (
+              <a
+                key={idx}
+                href="https://transcriber.cyrussaas.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  color: C.accent,
+                  textDecoration: "underline",
+                  textUnderlineOffset: "3px",
+                  fontWeight: 400,
+                  cursor: "pointer",
+                }}
+              >
+                transcriber.cyrussaas.com
+              </a>
+            );
+          } else if (part.match(/^https?:\/\//)) {
+            return (
+              <a
+                key={idx}
+                href={part}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  color: C.accent,
+                  textDecoration: "underline",
+                  textUnderlineOffset: "3px",
+                  fontWeight: 400,
+                  cursor: "pointer",
+                }}
+              >
+                {part.replace(/^https?:\/\//, "")}
+              </a>
+            );
+          }
+          return part;
+        })}
+      </Body>
+    );
+  });
+};
+
 const PROJECTS = [
   {
     num: "01",
     title: "Hinglish Live Transcriber",
     sub: "Production ASR Web App",
-    body: "Engineered a production ASR web app handling ~2,000 daily transcriptions via Groq Whisper and Node.js WebSockets, utilising a split Vercel/Render architecture for ~80ms RTT, live Web Audio API visualisation, and server-side Hunterian transliteration.",
-    tech: ["Node.js", "WebSockets", "Groq Whisper", "Web Audio API"],
+    body: `Built a production-deployed real-time Hinglish ASR web app, streaming 16kHz mono PCM from the browser over WebSockets to a Node.js server that segments audio into 3-second WAV chunks and forwards them to Groq Whisper Large v3 with Hindi language forcing and a Hinglish context prompt
+
+Designed a split deployment architecture (Vercel static frontend + Render persistent Node backend, Singapore region) to support persistent WebSocket connections that Vercel's serverless edge terminates — achieving ~80ms RTT from India
+
+Implemented server-side Romanisation (Devanagari to Latin via Hunterian transliteration), per-IP session rate limiting, a hallucination filter, transparent cold-start warm-up UI, and a live Canvas FFT audio visualiser using the Web Audio API
+
+Live at transcriber.cyrussaas.com — handles ~2,000 daily transcriptions on Groq's free-tier quota; stack: Node.js, WebSockets, Web Audio API, Canvas API, Vercel, Render`,
+    tech: ["Node.js", "WebSockets", "Groq Whisper", "Web Audio API", "Canvas API", "Vercel", "Render"],
     accent: C.accent,
   },
   {
@@ -682,7 +742,7 @@ function ProjectCard({ project, isActive }) {
       }
       transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
     >
-      <div>
+      <div style={{ display: "flex", flexDirection: "column", flex: 1, overflow: "hidden", minHeight: 0 }}>
         <p
           style={{
             fontFamily: "'Cormorant Garamond', serif",
@@ -720,9 +780,21 @@ function ProjectCard({ project, isActive }) {
           {project.sub}
         </p>
         <Rule style={{ marginBottom: "1.5rem" }} />
-        <Body>{project.body}</Body>
+        
+        {/* Scrollable body container that dynamically fills the space */}
+        <div 
+          className="project-body-scroll"
+          style={{ 
+            overflowY: "auto", 
+            flex: 1,
+            paddingRight: "0.5rem",
+            minHeight: 0
+          }}
+        >
+          {renderProjectBody(project.body)}
+        </div>
       </div>
-      <div style={{ display: "flex", flexWrap: "wrap", gap: "0.45rem", marginTop: "2rem" }}>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: "0.45rem", marginTop: "1.5rem", flexShrink: 0 }}>
         {project.tech.map((t) => (
           <Tag key={t}>{t}</Tag>
         ))}
