@@ -673,18 +673,76 @@ const PROJECTS = [
   },
   {
     num: "02",
-    title: "Warehouse Inventory Dashboard",
+    title: "Stocktake Inventory Platform",
     sub: "Sparkathon · Walmart Track",
-    body: "Full-stack dashboard (React 18, TypeScript, Tailwind) with 20+ modular components for real-time forecasting. Integrated with a YOLOv8/Tesseract OCR pipeline to autonomously classify and count products from live CCTV feeds.",
-    tech: ["React 18", "TypeScript", "YOLOv8", "Tesseract OCR"],
+    body: (
+      <>
+        <p style={{ marginBottom: "0.8rem" }}>
+          Built an AI-powered warehouse inventory and demand-forecasting platform that pairs a React 18 / TypeScript control tower with a Python computer-vision pipeline reading shelf stock directly from CCTV footage - no manual data entry. Built solo for the Walmart Sparkathon 2025.
+        </p>
+        <ul style={{ listStyleType: "disc", paddingLeft: "1.2rem", display: "flex", flexDirection: "column", gap: "0.4rem" }}>
+          <li>
+            Engineered a YOLOv8n + Tesseract OCR pipeline (Python, OpenCV) that processes recorded CCTV footage frame by frame, splitting warehouse crates from shelf products by pixel area, estimating box dimensions, and OCR-reading product labels and weights into per-item counts
+          </li>
+          <li>
+            Decoupled the vision pipeline from the dashboard via a single versioned JSON contract (schema_version 1) that Vite bakes in at build time, so the Python and TypeScript halves evolve independently and the UI degrades gracefully to demo data when empty
+          </li>
+          <li>
+            Built the SPA with 25+ modular components on Tailwind + shadcn/ui across 6 deep-linked routes - KPI cards, Recharts demand-forecast charts, a keyless Leaflet / OpenStreetMap logistics map, and a Capacitor barcode scanner
+          </li>
+          <li>
+            Live at{" "}
+            <a
+              href="https://warehouse-inventory-management-mocha.vercel.app"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: "inherit", textDecoration: "underline" }}
+            >
+              warehouse-inventory-management-mocha.vercel.app
+            </a>{" "}
+            - a zero-config static SPA on Vercel that needs no API keys to run.
+          </li>
+        </ul>
+      </>
+    ),
+    tech: ["React 18", "TypeScript", "YOLOv8", "Tesseract OCR", "Vite", "Vercel"],
     accent: C.sage,
   },
   {
     num: "03",
     title: "Agent Task Tracker",
-    sub: "AI-Powered Task Assignment",
-    body: "Dockerized, LangChain-powered multi-agent task management system using a Flask REST API (SQLAlchemy, JWT) and React/TypeScript frontend to autonomously process tasks, log activity, and optimise workflows.",
-    tech: ["LangChain", "Docker", "Flask", "React/TypeScript"],
+    sub: "AI-Powered Task Automation",
+    body: (
+      <>
+        <p style={{ marginBottom: "0.8rem" }}>
+          Built an AI task-automation platform where every task runs through a three-agent LLM pipeline - Analyzer, Executor, then Validator - on a Flask + MongoDB backend and a React 18 / TypeScript dashboard, with each agent invocation traced and persisted to an append-only audit log.
+        </p>
+        <ul style={{ listStyleType: "disc", paddingLeft: "1.2rem", display: "flex", flexDirection: "column", gap: "0.4rem" }}>
+          <li>
+            Designed a three-agent orchestration pipeline (Analyzer to Executor to Validator) using LangChain PromptTemplates, where the validator can APPROVE or REVISE the executor's draft and the system degrades gracefully to the draft if any agent fails
+          </li>
+          <li>
+            Made the LLM layer provider-agnostic - a single env var switches between Google Gemini (gemini-2.5-flash) and Groq (llama-3.3-70b) with exponential-backoff retries on rate limits - running entirely on free tiers at zero cost
+          </li>
+          <li>
+            Built a stateless JWT + bcrypt auth layer on a Flask 3.1 / PyMongo REST API documented with Swagger, an audit-first data model that double-writes each run to a mutable tasks collection and an append-only logs collection, all containerised with multi-stage Docker and Compose
+          </li>
+          <li>
+            Live at{" "}
+            <a
+              href="https://agent-task-tracker-8avp.onrender.com/docs"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: "inherit", textDecoration: "underline" }}
+            >
+              agent-task-tracker-8avp.onrender.com/docs
+            </a>{" "}
+            - the deployed Swagger API on Render, backed by MongoDB Atlas.
+          </li>
+        </ul>
+      </>
+    ),
+    tech: ["LangChain", "Flask", "MongoDB", "React/TypeScript", "Docker"],
     accent: C.warm,
   },
 ];
