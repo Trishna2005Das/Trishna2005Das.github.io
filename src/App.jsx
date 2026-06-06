@@ -266,7 +266,7 @@ const Eyebrow = ({ children, style = {} }) => (
   <p
     style={{
       fontFamily: "'Jost', sans-serif",
-      fontSize: "0.58rem",
+      fontSize: "0.75rem",
       letterSpacing: "0.22em",
       textTransform: "uppercase",
       color: C.inkMuted,
@@ -298,10 +298,10 @@ const Body = ({ children, style = {} }) => (
   <div
     style={{
       fontFamily: "'Jost', sans-serif",
-      fontWeight: 300,
+      fontWeight: 400,
       color: C.inkMuted,
       lineHeight: 1.78,
-      fontSize: "0.84rem",
+      fontSize: "1rem",
       ...style,
     }}
   >
@@ -313,7 +313,7 @@ const Tag = ({ children }) => (
   <span
     style={{
       fontFamily: "'Jost', sans-serif",
-      fontSize: "0.58rem",
+      fontSize: "0.75rem",
       letterSpacing: "0.18em",
       textTransform: "uppercase",
       border: `0.5px solid ${C.rule}`,
@@ -375,7 +375,7 @@ function Hero() {
               href={`#${n.toLowerCase()}`}
               style={{
                 fontFamily: "'Jost', sans-serif",
-                fontSize: "0.62rem",
+                fontSize: "0.78rem",
                 letterSpacing: "0.18em",
                 textTransform: "uppercase",
                 color: C.inkMuted,
@@ -547,7 +547,7 @@ function ExperienceRow({ exp, i }) {
           <p
             style={{
               fontFamily: "'Jost', sans-serif",
-              fontSize: "0.58rem",
+              fontSize: "0.75rem",
               letterSpacing: "0.14em",
               textTransform: "uppercase",
               color: C.accent,
@@ -576,7 +576,7 @@ function ExperienceRow({ exp, i }) {
           <p
             style={{
               fontFamily: "'Jost', sans-serif",
-              fontSize: "0.62rem",
+              fontSize: "0.78rem",
               letterSpacing: "0.12em",
               textTransform: "uppercase",
               color: C.inkMuted,
@@ -739,7 +739,7 @@ function ProjectCard({ project, isActive }) {
         <p
           style={{
             fontFamily: "'Jost', sans-serif",
-            fontSize: "0.58rem",
+            fontSize: "0.75rem",
             letterSpacing: "0.18em",
             textTransform: "uppercase",
             color: project.accent,
@@ -1194,10 +1194,10 @@ function Footer() {
           }}
         >
           <div>
-            <p style={{ fontFamily: "'Jost', sans-serif", fontSize: "0.82rem", color: "rgba(245,242,235,0.55)", marginBottom: "0.3rem" }}>
+            <p style={{ fontFamily: "'Jost', sans-serif", fontSize: "0.95rem", color: "rgba(245,242,235,0.8)", marginBottom: "0.3rem" }}>
               trishnadas7897@gmail.com
             </p>
-            <p style={{ fontFamily: "'Jost', sans-serif", fontSize: "0.82rem", color: "rgba(245,242,235,0.55)" }}>
+            <p style={{ fontFamily: "'Jost', sans-serif", fontSize: "0.95rem", color: "rgba(245,242,235,0.8)" }}>
               +91 74395 23511 · Mumbai, India
             </p>
           </div>
