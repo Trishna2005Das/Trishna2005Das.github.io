@@ -693,12 +693,12 @@ const PROJECTS = [
           <li>
             Live at{" "}
             <a
-              href="https://warehouse-inventory-management-mocha.vercel.app"
+              href="https://inventory-dashboard.cyrussaas.com/"
               target="_blank"
               rel="noopener noreferrer"
               style={{ color: "inherit", textDecoration: "underline" }}
             >
-              warehouse-inventory-management-mocha.vercel.app
+              inventory-dashboard.cyrussaas.com
             </a>{" "}
             - a zero-config static SPA on Vercel that needs no API keys to run.
           </li>
@@ -730,12 +730,12 @@ const PROJECTS = [
           <li>
             Live at{" "}
             <a
-              href="https://agent-task-tracker-8avp.onrender.com/docs"
+              href="https://task-tracker.cyrussaas.com/"
               target="_blank"
               rel="noopener noreferrer"
               style={{ color: "inherit", textDecoration: "underline" }}
             >
-              agent-task-tracker-8avp.onrender.com/docs
+              task-tracker.cyrussaas.com
             </a>{" "}
             - the deployed Swagger API on Render, backed by MongoDB Atlas.
           </li>
