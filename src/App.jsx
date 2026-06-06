@@ -827,8 +827,9 @@ function HorizontalProjects() {
   // this is unaffected by any CSS transform applied to the track.
   const cardOffsetsRef = useRef([]);
 
-  const xPx = useMotionValue(0);
-  const xSpring = useSpring(xPx, { damping: 44, stiffness: 260, mass: 0.7 });
+  // Single motion value rendered directly on the track. Snap is a tween
+  // (no spring overshoot/wobble); drag sets it 1:1 with the finger.
+  const x = useMotionValue(0);
 
   const measureOffsets = useCallback(() => {
     if (!trackRef.current) return;
@@ -853,8 +854,10 @@ function HorizontalProjects() {
     if (!offsets.length) return;
     // Align card's left edge to the track's paddingLeft (8vw)
     const pad = window.innerWidth * 0.08;
-    xPx.set(pad - offsets[idx]);
-  }, [xPx]);
+    // Browser-eased glide instead of a per-frame spring chase: one tween
+    // with a decelerating curve - no overshoot, no wobble.
+    animate(x, pad - offsets[idx], { duration: 0.6, ease: [0.22, 1, 0.36, 1] });
+  }, [x]);
 
   // Initial snap after offsets are ready
   useEffect(() => {
@@ -879,13 +882,14 @@ function HorizontalProjects() {
 
   const onPointerDown = (e) => {
     isDragging.current = true;
+    x.stop(); // cancel any in-flight glide so the grab is immediate
     dragStartX.current = e.clientX;
-    dragStartVal.current = xPx.get();
+    dragStartVal.current = x.get();
     e.currentTarget.setPointerCapture(e.pointerId);
   };
   const onPointerMove = (e) => {
     if (!isDragging.current) return;
-    xPx.set(dragStartVal.current + (e.clientX - dragStartX.current));
+    x.set(dragStartVal.current + (e.clientX - dragStartX.current));
   };
   const onPointerUp = (e) => {
     if (!isDragging.current) return;
@@ -982,7 +986,8 @@ function HorizontalProjects() {
           ref={trackRef}
           style={{
             display: "flex",
-            x: xSpring,
+            x,
+            willChange: "transform",
             paddingLeft: "clamp(2rem,8vw,10rem)",
             paddingRight: "clamp(2rem,8vw,10rem)",
             alignItems: "stretch",
